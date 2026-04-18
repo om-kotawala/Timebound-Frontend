@@ -3,7 +3,7 @@ import { Edit3, Save, X } from 'lucide-react'
 import Spinner from '../ui/Spinner'
 
 const ProfileAvatarCard = ({ profile, initials, editing, onEdit, onCancel, onSave, loading }) => (
-  <div className="card mb-6 flex items-center gap-5">
+  <div className="card mb-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
     <div
       className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-display font-extrabold"
       style={{
@@ -21,13 +21,13 @@ const ProfileAvatarCard = ({ profile, initials, editing, onEdit, onCancel, onSav
       </p>
     </div>
     {!editing ? (
-      <button onClick={onEdit} className="btn-ghost">
+      <button onClick={onEdit} className="btn-ghost w-full justify-center sm:w-auto">
         <Edit3 size={15} /> Edit
       </button>
     ) : (
-      <div className="flex gap-2">
-        <button onClick={onCancel} className="btn-ghost"><X size={15} /></button>
-        <button onClick={onSave} className="btn-primary" disabled={loading}>
+      <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+        <button onClick={onCancel} className="btn-ghost w-full justify-center sm:w-auto"><X size={15} /></button>
+        <button onClick={onSave} className="btn-primary w-full justify-center sm:w-auto" disabled={loading}>
           {loading ? <Spinner size={14} color="rgb(var(--accent-contrast))" /> : <><Save size={14} /> Save</>}
         </button>
       </div>

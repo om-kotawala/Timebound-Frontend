@@ -42,7 +42,7 @@ const CalendarPage = () => {
     <div className="animate-fade-in">
       <div className="mb-8">
         <p className="text-xs text-ink-500 uppercase tracking-widest mb-1 font-display">History & Tracking</p>
-        <h1 className="text-4xl font-display font-extrabold text-ink-50">
+        <h1 className="text-3xl sm:text-4xl font-display font-extrabold text-ink-50">
           Task <span className="text-gradient">Calendar</span>
         </h1>
         <p className="text-ink-400 mt-1 text-sm">Click any date to view your task history</p>
@@ -53,7 +53,7 @@ const CalendarPage = () => {
 
         <div className="space-y-4">
           {!selectedDate ? (
-            <div className="card h-full flex items-center justify-center" style={{ minHeight: '300px' }}>
+            <div className="card h-full flex items-center justify-center" style={{ minHeight: '240px' }}>
               <EmptyState
                 icon={CalendarDays}
                 title="Select a date"

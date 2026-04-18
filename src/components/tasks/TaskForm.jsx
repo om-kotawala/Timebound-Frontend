@@ -52,7 +52,7 @@ const TaskForm = memo(({ onSubmit, loading, userRole, assignableUsers = [], assi
           <label className="flex items-center gap-1.5 text-xs text-ink-400 mb-2 uppercase tracking-widest">
             <Send size={11} /> Task Type
           </label>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {[
               { value: 'Personal', label: 'Personal Task' },
               { value: 'Assigned', label: 'Assign Task' },
@@ -104,14 +104,14 @@ const TaskForm = memo(({ onSubmit, loading, userRole, assignableUsers = [], assi
         <label className="flex items-center gap-1.5 text-xs text-ink-400 mb-2 uppercase tracking-widest">
           <Tag size={11} /> Priority
         </label>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
           {PRIORITIES.map(p => {
             const cfg = PRIORITY_CONFIG[p]
             return (
               <button
                 key={p} type="button"
                 onClick={() => setPriority(p)}
-                className="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all duration-200"
+                className="py-2 px-3 rounded-xl text-xs font-semibold transition-all duration-200"
                 style={{
                   background: priority === p ? cfg.bg : 'rgb(var(--surface-muted) / 0.78)',
                   border: `1px solid ${priority === p ? cfg.border : 'rgb(var(--ink-300) / 0.12)'}`,

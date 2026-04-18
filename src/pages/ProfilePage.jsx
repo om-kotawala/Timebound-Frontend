@@ -36,10 +36,10 @@ const ProfilePage = () => {
   }, [profile?.name])
 
   return (
-    <div className="animate-fade-in max-w-2xl">
+    <div className="animate-fade-in max-w-2xl w-full">
       <div className="mb-8">
         <p className="text-xs text-ink-500 uppercase tracking-widest mb-1 font-display">Account</p>
-        <h1 className="text-4xl font-display font-extrabold text-ink-50">
+        <h1 className="text-3xl sm:text-4xl font-display font-extrabold text-ink-50">
           My <span className="text-gradient">Profile</span>
         </h1>
       </div>

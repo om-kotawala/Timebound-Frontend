@@ -35,14 +35,14 @@ export default function TaskFilters() {
         <FilterBtn group="priority" value="All" label="All" />
         {PRIORITIES.map(p => <FilterBtn key={p} group="priority" value={p} label={p} />)}
       </div>
-      <div className="w-px h-4 bg-ink-700" />
-      <div className="flex gap-1">
+      <div className="hidden h-4 w-px bg-ink-700 sm:block" />
+      <div className="flex flex-wrap gap-1">
         <FilterBtn group="status" value="All" label="All Status" />
         <FilterBtn group="status" value="Pending" label="Pending" />
         <FilterBtn group="status" value="Completed" label="Completed" />
       </div>
       {isFiltered && (
-        <button onClick={() => dispatch(clearFilters())} className="flex items-center gap-1 text-xs text-coral hover:text-coral/80 transition-colors ml-auto">
+        <button onClick={() => dispatch(clearFilters())} className="flex w-full items-center gap-1 text-xs text-coral transition-colors hover:text-coral/80 sm:ml-auto sm:w-auto">
           <X size={12}/> Clear
         </button>
       )}

@@ -100,8 +100,8 @@ const TaskCard = memo(({ task, onComplete, onEdit, onDelete, readonly = false })
             )}
           </div>
 
-          <div className="flex items-center justify-between mt-2">
-            <div className="flex items-center gap-3">
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="flex items-center gap-1 text-xs text-ink-400">
                 <Clock size={10} />
                 {formatDate(task.creationTime, { timeOnly: true })}
@@ -115,7 +115,7 @@ const TaskCard = memo(({ task, onComplete, onEdit, onDelete, readonly = false })
             </div>
 
             {(canEdit || canDelete) && !locked && !done && (
-              <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <div className="flex items-center gap-1 opacity-100 transition-opacity duration-200 sm:opacity-0 sm:group-hover:opacity-100">
                 {canEdit && (
                   <button onClick={() => onEdit(task)} className="p-1.5 rounded-lg hover:bg-white/5 text-ink-400 hover:text-ink-100 transition-colors">
                     <Pencil size={13} />

@@ -1,7 +1,7 @@
 
 import React, { memo } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, CalendarDays, BarChart3, User, LogOut, Clock, Zap } from 'lucide-react'
+import { LayoutDashboard, CalendarDays, BarChart3, User, LogOut, Clock, Zap, X } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../store/slices/authSlice'
 
@@ -12,40 +12,54 @@ const NAV = [
   { to: '/profile', icon: User, label: 'Profile' },
 ]
 
-const Sidebar = memo(() => {
+const Sidebar = memo(({ isOpen = false, onClose = () => {} }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const now = new Date()
   const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
   const date = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
 
-  const handleLogout = () => { dispatch(logout()); navigate('/login') }
+  const handleLogout = () => {
+    dispatch(logout())
+    onClose()
+    navigate('/login')
+  }
 
   return (
     <aside
-      className="fixed left-0 top-0 h-full w-64 flex flex-col"
+      className={`fixed inset-y-0 left-0 z-40 flex h-full w-[min(18rem,85vw)] flex-col overflow-y-auto transition-transform duration-300 ease-out md:w-64 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}
       style={{
         background: 'rgb(var(--sidebar-bg) / 0.95)',
         borderRight: '1px solid rgb(var(--border-highlight) / 0.08)',
         backdropFilter: 'blur(20px)',
-        zIndex: 40,
       }}
     >
       {/* Logo */}
-      <div className="px-6 pt-8 pb-6">
-        <div className="flex items-center gap-3 mb-1">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center animate-pulse-volt" style={{ background: 'rgb(var(--volt-300))' }}>
-            <Zap size={18} color="rgb(var(--accent-contrast))" strokeWidth={3} />
+      <div className="px-5 pb-6 pt-5 md:px-6 md:pt-8">
+        <div className="mb-1 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl animate-pulse-volt" style={{ background: 'rgb(var(--volt-300))' }}>
+              <Zap size={18} color="rgb(var(--accent-contrast))" strokeWidth={3} />
+            </div>
+            <div>
+              <h1 className="font-display text-lg text-ink-50 tracking-tight font-semibold">TimeBound</h1>
+              <p className="text-xs text-ink-500">Smart Task Tracker</p>
+            </div>
           </div>
-          <div>
-            <h1 className="font-display text-lg text-ink-50 tracking-tight font-semibold">TimeBound</h1>
-            <p className="text-xs text-ink-500">Smart Task Tracker</p>
-          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-ink-700/60 text-ink-400 transition-colors hover:text-ink-100 md:hidden"
+          >
+            <X size={16} />
+          </button>
         </div>
       </div>
 
       {/* Clock */}
-      <div className="mx-4 mb-6 p-3 rounded-xl" style={{ background: 'rgb(var(--volt-300) / 0.06)', border: '1px solid rgb(var(--volt-300) / 0.12)' }}>
+      <div className="mx-4 mb-6 rounded-xl p-3" style={{ background: 'rgb(var(--volt-300) / 0.06)', border: '1px solid rgb(var(--volt-300) / 0.12)' }}>
         <div className="flex items-center gap-2">
           <Clock size={13} className="text-volt-300" />
           <span className="text-xs text-ink-400">{date}</span>
@@ -60,6 +74,7 @@ const Sidebar = memo(() => {
             key={to}
             to={to}
             end={to === '/'}
+            onClick={onClose}
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                 isActive

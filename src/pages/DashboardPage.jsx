@@ -46,10 +46,10 @@ const DashboardPage = () => {
   return (
     <div className="animate-fade-in">
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
-        <div>
+      <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
           <p className="text-sm text-ink-400 mb-1">{dateStr}</p>
-          <h1 className="text-4xl font-display font-extrabold text-ink-50">
+          <h1 className="text-3xl sm:text-4xl font-display font-extrabold text-ink-50">
             {greeting} <span className="text-gradient">👋</span>
           </h1>
           <p className="text-ink-400 mt-1 text-sm">
@@ -61,7 +61,7 @@ const DashboardPage = () => {
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Total" value={stats.total} icon={ListTodo} color="#9494BA" />
         <StatCard label="Completed" value={stats.completed} icon={CheckSquare} color="#C8FF00" sublabel={stats.pct + '% done'} />
         <StatCard label="Pending" value={stats.pending} icon={Circle} color="#FFB347" />
@@ -91,7 +91,7 @@ const DashboardPage = () => {
 
         {/* Right: Task list */}
         <div>
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-sm font-display font-bold text-ink-200 uppercase tracking-widest">
               Today's Tasks
               {tasks.length > 0 && <span className="ml-2 text-xs text-ink-500 font-normal normal-case tracking-normal">({tasks.length})</span>}

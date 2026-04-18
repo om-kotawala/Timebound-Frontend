@@ -46,7 +46,7 @@ const ProgressPage = () => {
     <div className="animate-fade-in space-y-8">
       <div>
         <p className="text-xs text-ink-500 uppercase tracking-widest mb-1 font-display">Analytics</p>
-        <h1 className="text-4xl font-display font-extrabold text-ink-50">
+        <h1 className="text-3xl sm:text-4xl font-display font-extrabold text-ink-50">
           Your <span className="text-gradient">Progress</span>
         </h1>
         <p className="text-ink-400 mt-1 text-sm">Track your productivity across all timeframes</p>

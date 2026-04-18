@@ -13,7 +13,7 @@ const ProgressOverview = ({ items }) => (
     {items.map(({ label, sublabel, pct, period }) => {
       const Icon = ICONS[label]
       return (
-        <div key={label} className="card flex items-center gap-6 glass-hover">
+        <div key={label} className="card glass-hover flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
           <ProgressRing pct={pct} size={96} stroke={8} />
           <div>
             <div className="flex items-center gap-2 text-xs text-ink-500 uppercase tracking-widest mb-1 font-display">

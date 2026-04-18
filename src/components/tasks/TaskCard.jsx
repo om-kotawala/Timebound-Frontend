@@ -89,7 +89,7 @@ const TaskCard = memo(function TaskCard({ task, index = 0 }) {
 
           {/* Actions */}
           {!locked && (
-            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
+            <div className="ml-2 flex items-center gap-1 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100">
               {!completed && (
                 <button onClick={handleEdit} className="p-1.5 rounded-lg text-ink-400 hover:text-volt hover:bg-volt/10 transition-all">
                   <Edit3 size={14}/>

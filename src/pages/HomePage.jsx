@@ -41,12 +41,12 @@ export default function HomePage() {
   return (
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Header */}
-      <div className="flex items-start justify-between animate-slide-up">
-        <div>
+      <div className="flex flex-col gap-5 animate-slide-up sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
           <p className="text-ink-400 text-sm font-body mb-1 flex items-center gap-2">
             <Calendar size={13}/> {today}
           </p>
-          <h1 className="font-display text-3xl lg:text-4xl font-extrabold text-white">
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-white">
             {greeting}, <span className="text-gradient">{user?.name?.split(' ')[0] || 'friend'}.</span>
           </h1>
           <p className="text-ink-400 mt-1 font-body">
@@ -67,7 +67,7 @@ export default function HomePage() {
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Total" value={progress.total} icon={ListTodo} color="#9494BA" delay={0}
           sub="tasks today" />
         <StatCard label="Completed" value={progress.completed} icon={CheckCircle2} color="#C8FF00" delay={80}
@@ -87,7 +87,7 @@ export default function HomePage() {
 
         {/* Right: task list */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="font-display text-lg font-bold text-white">Today's Tasks</h2>
             <span className="badge badge-medium">{filteredTasks.length}</span>
           </div>

@@ -83,6 +83,7 @@ html[data-theme='light'] {
 @layer base {
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  html, body, #root { min-height: 100%; }
   body {
     font-family: var(--font-sans);
     background-color: rgb(var(--app-bg));
@@ -95,6 +96,12 @@ html[data-theme='light'] {
   button, input, select, textarea {
     font: inherit;
   }
+  button { touch-action: manipulation; }
+  img, svg, canvas, video {
+    max-width: 100%;
+    height: auto;
+  }
+  textarea { resize: vertical; }
   ::selection { background: rgb(var(--volt-300) / 0.3); color: rgb(var(--volt-300)); }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: rgb(var(--ink-800)); }
@@ -292,4 +299,96 @@ html[data-theme='light'] {
   .text-gradient-white { background: linear-gradient(135deg, rgb(var(--ink-50)), rgb(var(--ink-300))); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .border-volt { border-color: rgb(var(--volt-300) / 0.2); }
   .shimmer-bg { background: linear-gradient(90deg, rgb(var(--ink-700)) 25%, rgb(var(--ink-600)) 50%, rgb(var(--ink-700)) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+}
+
+@media (hover: none) {
+  .glass-hover:hover,
+  .btn-primary:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .react-calendar__tile {
+    padding: 9px 4px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .input-field,
+  .btn-primary,
+  .btn-ghost {
+    min-height: 44px;
+  }
+
+  .input-field {
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    padding: 10px 16px;
+  }
+
+  .btn-danger {
+    min-height: 40px;
+  }
+
+  .badge {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .react-calendar__navigation {
+    margin-bottom: 8px !important;
+  }
+
+  .react-calendar__navigation button {
+    min-width: 34px !important;
+    font-size: 14px !important;
+  }
+
+  .react-calendar__month-view__weekdays__weekday {
+    font-size: 10px !important;
+    padding: 4px 0 !important;
+  }
+
+  .react-calendar__tile {
+    font-size: 12px !important;
+    padding: 8px 2px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
