@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { LayoutDashboard, CalendarDays, BarChart3, User, LogOut, Clock, Zap, X } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../store/slices/authSlice'
+import { formatDate } from '../../utils'
 
 const NAV = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
@@ -16,8 +17,8 @@ const Sidebar = memo(({ isOpen = false, onClose = () => {} }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const now = new Date()
-  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
-  const date = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+  const time = formatDate(now, { timeOnly: true })
+  const date = formatDate(now, { weekdayShort: true })
 
   const handleLogout = () => {
     dispatch(logout())
@@ -62,7 +63,7 @@ const Sidebar = memo(({ isOpen = false, onClose = () => {} }) => {
       <div className="mx-4 mb-6 rounded-xl p-3" style={{ background: 'rgb(var(--volt-300) / 0.06)', border: '1px solid rgb(var(--volt-300) / 0.12)' }}>
         <div className="flex items-center gap-2">
           <Clock size={13} className="text-volt-300" />
-          <span className="text-xs text-ink-400">{date}</span>
+          <span className="text-xs text-ink-400">{date} IST</span>
         </div>
         <div className="text-2xl font-display font-semibold text-gradient mt-1">{time}</div>
       </div>

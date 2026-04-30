@@ -14,6 +14,9 @@ import {
   updateTask,
   deleteTask,
   completeTask,
+  submitTaskProof,
+  approveTaskProof,
+  rejectTaskProof,
   fetchTodayTasks,
   fetchAssignableUsers,
 } from '../store/slices/tasksSlice'
@@ -69,6 +72,27 @@ export const useTasks = () => {
     return false
   }, [dispatch])
 
+  const handleSubmitProof = useCallback(async (id, file) => {
+    const result = await dispatch(submitTaskProof({ id, file }))
+    if (submitTaskProof.fulfilled.match(result)) { toast.success('Proof sent for review'); return true }
+    toast.error(result.payload || 'Failed to submit proof')
+    return false
+  }, [dispatch])
+
+  const handleApproveProof = useCallback(async (id) => {
+    const result = await dispatch(approveTaskProof(id))
+    if (approveTaskProof.fulfilled.match(result)) { toast.success('Proof approved and task completed'); return true }
+    toast.error(result.payload || 'Failed to approve proof')
+    return false
+  }, [dispatch])
+
+  const handleRejectProof = useCallback(async (id, reason) => {
+    const result = await dispatch(rejectTaskProof({ id, reason }))
+    if (rejectTaskProof.fulfilled.match(result)) { toast.success('Proof rejected with reason'); return true }
+    toast.error(result.payload || 'Failed to reject proof')
+    return false
+  }, [dispatch])
+
   const handleFilter = useCallback((updates) => dispatch(setFilter(updates)), [dispatch])
 
   return {
@@ -85,6 +109,9 @@ export const useTasks = () => {
     handleUpdate,
     handleDelete,
     handleComplete,
+    handleSubmitProof,
+    handleApproveProof,
+    handleRejectProof,
     handleFilter,
   }
 }

@@ -44,6 +44,13 @@ export const tasksAPI = {
   update:   (id, data) => api.put('/tasks/' + id, data),
   delete:   (id) => api.delete('/tasks/' + id),
   complete: (id) => api.patch('/tasks/' + id + '/complete'),
+  submitProof: (id, file) => {
+    const formData = new FormData()
+    formData.append('proof', file)
+    return api.post('/tasks/' + id + '/proof', formData)
+  },
+  approveProof: (id) => api.patch('/tasks/' + id + '/proof/approve'),
+  rejectProof: (id, reason) => api.patch('/tasks/' + id + '/proof/reject', { reason }),
 }
 
 export const progressAPI = {

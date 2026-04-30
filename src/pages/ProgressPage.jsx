@@ -13,7 +13,7 @@ import {
 import ProgressOverview from '../components/progress/ProgressOverview'
 import ProgressCharts from '../components/progress/ProgressCharts'
 import AchievementGrid from '../components/progress/AchievementGrid'
-import { formatLocalDateKey } from '../utils'
+import { formatLocalDateKey, getCurrentISTParts } from '../utils'
 
 const ProgressPage = () => {
   const dispatch = useDispatch()
@@ -26,10 +26,11 @@ const ProgressPage = () => {
   useEffect(() => {
     const now = new Date()
     const today = formatLocalDateKey(now)
+    const { month, year } = getCurrentISTParts()
 
     dispatch(fetchDailyProgress(today))
-    dispatch(fetchMonthlyProgress({ month: now.getMonth() + 1, year: now.getFullYear() }))
-    dispatch(fetchYearlyProgress(now.getFullYear()))
+    dispatch(fetchMonthlyProgress({ month: Number(month), year: Number(year) }))
+    dispatch(fetchYearlyProgress(Number(year)))
   }, [dispatch])
 
   const chartMonthlyData = useMemo(

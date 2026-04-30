@@ -10,6 +10,7 @@ import ProgressRing from '../components/ui/ProgressRing'
 import StatCard from '../components/ui/StatCard'
 import EmptyState from '../components/ui/EmptyState'
 import Spinner from '../components/ui/Spinner'
+import { formatDate, getCurrentISTHour } from '../utils'
 
 const DashboardPage = () => {
   const {
@@ -25,19 +26,21 @@ const DashboardPage = () => {
     handleUpdate,
     handleDelete,
     handleComplete,
+    handleSubmitProof,
+    handleApproveProof,
+    handleRejectProof,
     handleFilter,
   } = useTasks()
   const [editingTask, setEditingTask] = useState(null)
 
-  const now = new Date()
   const greeting = useMemo(() => {
-    const h = now.getHours()
+    const h = getCurrentISTHour()
     if (h < 12) return 'Good morning'
     if (h < 17) return 'Good afternoon'
     return 'Good evening'
   }, [])
 
-  const dateStr = useMemo(() => now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }), [])
+  const dateStr = useMemo(() => formatDate(new Date(), { weekdayLong: true }), [])
 
   const handleEdit = useCallback((task) => setEditingTask(task), [])
   const handleCloseEdit = useCallback(() => setEditingTask(null), [])
@@ -84,7 +87,7 @@ const DashboardPage = () => {
             <Zap size={16} className="text-volt-300 flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-xs font-display font-semibold text-volt-300 mb-0.5">Deadline enforcement</p>
-              <p className="text-xs text-ink-400 leading-relaxed">All tasks auto-lock at 11:59 PM today. Plan your day wisely!</p>
+              <p className="text-xs text-ink-400 leading-relaxed">All task times are shown in IST and deadlines lock at 11:59 PM IST.</p>
             </div>
           </div>
         </div>
@@ -112,7 +115,11 @@ const DashboardPage = () => {
                 <div key={task._id} className="animate-slide-up">
                   <TaskCard
                     task={task}
+                    loading={loading}
                     onComplete={handleComplete}
+                    onSubmitProof={handleSubmitProof}
+                    onApproveProof={handleApproveProof}
+                    onRejectProof={handleRejectProof}
                     onEdit={handleEdit}
                     onDelete={handleDelete}
                   />
